@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:18:39 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 14:10:02 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/24 20:13:35 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ long int	get_curr_time(void)
 	long int		time;
 
 	gettimeofday(&now, NULL);
-	time = now.tv_sec * 100 + now.tv_usec / 1000;
+	time = now.tv_sec * 1000 + now.tv_usec / 1000;
 	return (time);
 }

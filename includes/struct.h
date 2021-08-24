@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:26:56 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 16:51:39 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/24 20:11:42 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct	s_philo
 {
 	pthread_t		*thread;
+	pthread_t		*monitor;
 	pthread_mutex_t	*rfork;
 	pthread_mutex_t	*lfork;
 	struct s_params	*params;
@@ -36,13 +37,5 @@ typedef struct	s_params
 	int eat_count;
 	int *waiter;
 }				t_params;
-
-typedef struct	s_data
-{
-	pthread_mutex_t	*forks;
-	struct s_philo	*philos;
-	struct s_params	*params;
-	
-}				t_data;
 
 #endif

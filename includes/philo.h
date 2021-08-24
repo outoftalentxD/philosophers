@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:47 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 16:55:27 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/24 20:19:36 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@
 
 # include "struct.h"
 
-void throw_error(int code);
+void 			throw_error(int code);
 
-int is_number(char *str);
-int args_is_valid(char **av);
-int ft_strlen(char *str);
-long int	get_curr_time(void);
-void	*ft_calloc(size_t count, size_t size);
+int				is_number(char *str);
+int				args_is_valid(char **av);
+int				ft_strlen(char *str);
+long int		get_curr_time(void);
+long long int	my_curr_time(void);
+void			*ft_calloc(size_t count, size_t size);
 
 
 t_params		*init_params(char **av);
@@ -41,6 +42,14 @@ pthread_mutex_t	*init_forks(int count);
 t_philo			*init_philos(t_params *params, pthread_mutex_t *forks);
 int				init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks);
 
+int 			take_forks(t_philo *philo);
+int 			release_forks(t_philo *philo);
+
+void			monitor(t_philo *philos);
+
 void			action(t_philo *philo);
+void			action_eat(t_philo *philo);
+void			action_sleep(t_philo *philo);
+
 
 #endif

@@ -14,8 +14,10 @@ HEADERS = minitalk.h struct.h
 SRCS =	srcs/main.c \
 		srcs/tools.c \
 		srcs/init.c \
-		srcs/core.c \
-		srcs/ft_calloc.c
+		srcs/monitor.c \
+		srcs/forks.c \
+		srcs/ft_calloc.c \
+		srcs/actions.c
 
 OBJS = $(SRCS:.c=.o)
 
