@@ -1,7 +1,9 @@
 NAME = philo
-CC = clang
+CC = gcc
 
-CCFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
+
+PTHREADFLAG = -pthread
 
 INCLUDES = ./includes
 
@@ -11,20 +13,22 @@ HEADERS = minitalk.h struct.h
 
 SRCS =	srcs/main.c \
 		srcs/tools.c \
-		srcs/init.c
+		srcs/init.c \
+		srcs/core.c \
+		srcs/ft_calloc.c
 
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): 
 
 $(OBJS): %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $<  -I $(INCLUDES) -o $@
+	$(CC) $(CFLAGS) -c $<  -I $(INCLUDES) -o  $@
 
 all: $(NAME)
 
 
 philo: $(OBJS) $(HEADER) 
-	$(CC) $(OBJS) -o $@
+	$(CC) $(OBJS) $(PTHREADFLAG) -o $@
 
 clean:
 	$(RM) $(OBJS)
