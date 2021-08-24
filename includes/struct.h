@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:26:56 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 14:20:33 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/24 16:51:39 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ typedef struct	s_philo
 	pthread_mutex_t	*rfork;
 	pthread_mutex_t	*lfork;
 	struct s_params	*params;
+	long int		start;
+	long int		eat;
 	int				id;
-	int				eat_count;
+	int				meals_count;
 }				t_philo;
 
 typedef struct	s_params
@@ -32,6 +34,7 @@ typedef struct	s_params
 	int die_time;
 	int sleep_time;
 	int eat_count;
+	int *waiter;
 }				t_params;
 
 typedef struct	s_data

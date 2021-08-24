@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:41 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 14:16:36 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/24 15:51:50 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int main(int argc, char **argv)
 	pthread_mutex_t *forks;
 
 	
-	// if (argc != 5 && argc != 6)
-		// throw_error(ARGS_COUNT_ERROR);
-	// args_is_valid(argv);
-	// params = init_params(argv);
-	// forks = init_forks(params->count);
-	// philos = init_philos(params, forks);
+	if (argc != 5 && argc != 6)
+		throw_error(ARGS_COUNT_ERROR);
+	args_is_valid(argv);
+	params = init_params(argv);
+	forks = init_forks(params->count);
+	philos = init_philos(params, forks);
+	init_threads(philos, params, forks);
 }		

@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:47 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 14:14:25 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/24 16:55:27 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,14 @@ int is_number(char *str);
 int args_is_valid(char **av);
 int ft_strlen(char *str);
 long int	get_curr_time(void);
+void	*ft_calloc(size_t count, size_t size);
+
 
 t_params		*init_params(char **av);
 pthread_mutex_t	*init_forks(int count);
 t_philo			*init_philos(t_params *params, pthread_mutex_t *forks);
+int				init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks);
+
+void			action(t_philo *philo);
 
 #endif
