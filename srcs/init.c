@@ -6,28 +6,28 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:57:10 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 20:23:12 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 22:22:38 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static pthread_mutex_t *pmute_init(void)
+static pthread_mutex_t	*pmute_init(void)
 {
-	pthread_mutex_t *pmute;
+	pthread_mutex_t	*pmute;
 
 	pmute = ft_calloc(1, sizeof(pthread_mutex_t));
 	if (!pmute)
 		throw_error(ALLOC_ERORR);
 	if (pthread_mutex_init(pmute, NULL))
 		throw_error(MUTEX_INIT_ERROR);
-	return(pmute);
+	return (pmute);
 }
 
-pthread_mutex_t *init_forks(int count)
+pthread_mutex_t	*init_forks(int count)
 {
-	int i;
-	pthread_mutex_t *forks;
+	int				i;
+	pthread_mutex_t	*forks;
 
 	forks = ft_calloc(count, sizeof(pthread_mutex_t));
 	if (!forks)
@@ -41,10 +41,9 @@ pthread_mutex_t *init_forks(int count)
 	return (forks);
 }
 
-t_params *init_params(char **av)
+t_params	*init_params(char **av)
 {
-	t_params	*params;
-	pthread_mutex_t *pmute;
+	t_params		*params;
 
 	av++;
 	params = ft_calloc(1, sizeof(t_params));
@@ -67,11 +66,11 @@ t_params *init_params(char **av)
 	return (params);
 }
 
-t_philo *init_philos(t_params *params, pthread_mutex_t *forks)
+t_philo	*init_philos(t_params *params, pthread_mutex_t *forks)
 {
-	t_philo *philos;
+	t_philo	*philos;
 	int		i;
-	
+
 	i = -1;
 	philos = ft_calloc(params->count, sizeof(t_philo));
 	if (!philos)
@@ -93,10 +92,10 @@ t_philo *init_philos(t_params *params, pthread_mutex_t *forks)
 	return (philos);
 }
 
-int	init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks)
+int	init_threads(t_philo *philos, t_params *params)
 {
-	long int time;
-	int i;
+	long int	time;
+	int			i;
 
 	time = get_curr_time();
 	i = -1;
@@ -104,7 +103,8 @@ int	init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks)
 	{
 		philos[i].start = time;
 		philos[i].eat = time;
-		if (pthread_create(philos[i].thread, NULL, (void *)action, (void *)&philos[i]))
+		if (pthread_create(philos[i].thread, NULL,
+				(void *)action, (void *)&philos[i]))
 			throw_error(PTHREAD_START_ERROR);
 		if (pthread_detach(*(philos[i].thread)))
 			throw_error(PTHREAD_DETACH_ERROR);
@@ -115,8 +115,5 @@ int	init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks)
 		throw_error(PTHREAD_START_ERROR);
 	if (pthread_join(*(params->monitor), NULL))
 		throw_error(PTHREAD_JOIN_ERROR);
-	if (pthread_detach(*(params->monitor)))
-		throw_error(PTHREAD_DETACH_ERROR);
-
 	return (0);
 }

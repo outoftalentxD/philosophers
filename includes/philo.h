@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:47 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 20:30:35 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 22:22:21 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int				ft_atoi(const char *str);
 t_params		*init_params(char **av);
 pthread_mutex_t	*init_forks(int count);
 t_philo			*init_philos(t_params *params, pthread_mutex_t *forks);
-int				init_threads(t_philo *philos, t_params *params,
-					pthread_mutex_t *forks);
+int				init_threads(t_philo *philos, t_params *params);
 
 int				take_forks(t_philo *philo);
 int				release_forks(t_philo *philo);

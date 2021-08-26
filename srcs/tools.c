@@ -6,15 +6,15 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:18:39 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 20:23:57 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 22:21:15 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i])
@@ -22,7 +22,7 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-int args_is_valid(char **av)
+int	args_is_valid(char **av)
 {
 	while (*(++av))
 		if (!is_number(*av))
@@ -30,7 +30,7 @@ int args_is_valid(char **av)
 	return (1);
 }
 
-int is_number(char *str)
+int	is_number(char *str)
 {
 	while (*str)
 	{
@@ -41,9 +41,9 @@ int is_number(char *str)
 	return (1);
 }
 
-void throw_error(int code)
+void	throw_error(int code)
 {
-	char *error;
+	char	*error;
 
 	if (code == ARGS_COUNT_ERROR)
 		error = "[X] ERROR: Wrong number of arguments\n";
