@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:47 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 20:22:17 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 20:30:35 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # include "struct.h"
 
-void 			throw_error(int code);
+void			throw_error(int code);
 long int		get_curr_time(void);
 void			my_usleep(int val);
 void			print_status(const char *arg, long int time, t_philo *philo);
@@ -44,10 +44,11 @@ int				ft_atoi(const char *str);
 t_params		*init_params(char **av);
 pthread_mutex_t	*init_forks(int count);
 t_philo			*init_philos(t_params *params, pthread_mutex_t *forks);
-int				init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks);
+int				init_threads(t_philo *philos, t_params *params,
+					pthread_mutex_t *forks);
 
-int 			take_forks(t_philo *philo);
-int 			release_forks(t_philo *philo);
+int				take_forks(t_philo *philo);
+int				release_forks(t_philo *philo);
 
 void			monitor(t_philo *philo);
 
