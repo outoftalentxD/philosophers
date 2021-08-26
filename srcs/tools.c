@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:18:39 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 20:13:35 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 20:23:57 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,19 @@ void throw_error(int code)
 	char *error;
 
 	if (code == ARGS_COUNT_ERROR)
-		error = "[i] ERROR: Wrong number of arguments\n";
+		error = "[X] ERROR: Wrong number of arguments\n";
 	else if (code == ARG_ERROR)
-		error = "[i] ERROR: Wrong argument\n";
+		error = "[X] ERROR: Wrong argument\n";
 	else if (code == ALLOC_ERORR)
-		error = "[i] ERROR: Memory allocation error\n";
+		error = "[X] ERROR: Memory allocation error\n";
+	else if (code == MUTEX_INIT_ERROR)
+		error = "[X] ERROR: Mutex initialiaztion error\n";
+	else if (code == PTHREAD_START_ERROR)
+		error = "[X] ERROR: Pthread start error\n";
+	else if (code == PTHREAD_DETACH_ERROR)
+		error = "[X] ERROR: Pthread detach error\n";
+	else if (code == PTHREAD_JOIN_ERROR)
+		error = "[X] ERROR: Pthread join erorr\n";
 	write(2, error, ft_strlen(error));
 	exit(0);
 }

@@ -6,16 +6,16 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:41 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 19:23:17 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 20:25:00 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void free_philos(t_philo *philos, pthread_mutex_t *forks)
+static void	free_philos(t_philo *philos, pthread_mutex_t *forks)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	count = philos[0].params->count;
 	i = -1;
@@ -33,13 +33,12 @@ static void free_philos(t_philo *philos, pthread_mutex_t *forks)
 	exit(0);
 }	
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_philo *philos;
-	t_params *params;
-	pthread_mutex_t *forks;
+	t_philo				*philos;
+	t_params			*params;
+	pthread_mutex_t		*forks;
 
-	
 	if (argc != 5 && argc != 6)
 		throw_error(ARGS_COUNT_ERROR);
 	args_is_valid(argv);

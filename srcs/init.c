@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:57:10 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 19:22:59 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 20:23:12 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static pthread_mutex_t *pmute_init(void)
 	pmute = ft_calloc(1, sizeof(pthread_mutex_t));
 	if (!pmute)
 		throw_error(ALLOC_ERORR);
-	pthread_mutex_init(pmute, NULL);
+	if (pthread_mutex_init(pmute, NULL))
+		throw_error(MUTEX_INIT_ERROR);
 	return(pmute);
 }
 
@@ -33,7 +34,10 @@ pthread_mutex_t *init_forks(int count)
 		throw_error(ALLOC_ERORR);
 	i = -1;
 	while (++i < count)
-		pthread_mutex_init(&forks[i], NULL);
+	{
+		if (pthread_mutex_init(&forks[i], NULL))
+			throw_error(MUTEX_INIT_ERROR);
+	}
 	return (forks);
 }
 
@@ -46,16 +50,18 @@ t_params *init_params(char **av)
 	params = ft_calloc(1, sizeof(t_params));
 	if (!params)
 		throw_error(ALLOC_ERORR);
-	params->count = atoi(av[0]);
-	params->die_time = atoi(av[1]);
-	params->eat_time = atoi(av[2]);
-	params->sleep_time = atoi(av[3]);
+	params->count = ft_atoi(av[0]);
+	params->die_time = ft_atoi(av[1]);
+	params->eat_time = ft_atoi(av[2]);
+	params->sleep_time = ft_atoi(av[3]);
 	if (av[4])
-		params->meals_count = atoi(av[4]);
+		params->meals_count = ft_atoi(av[4]);
 	else
 		params->meals_count = 0;
 	params->pmute = pmute_init();
 	params->monitor = ft_calloc(1, sizeof(pthread_t));
+	if (!params->monitor)
+		throw_error(ALLOC_ERORR);
 	params->death = 0;
 	params->finished = 0;
 	return (params);
@@ -98,14 +104,19 @@ int	init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks)
 	{
 		philos[i].start = time;
 		philos[i].eat = time;
-		pthread_create(philos[i].thread, NULL, (void *)action, (void *)&philos[i]);
-		pthread_detach(*(philos[i].thread));
+		if (pthread_create(philos[i].thread, NULL, (void *)action, (void *)&philos[i]))
+			throw_error(PTHREAD_START_ERROR);
+		if (pthread_detach(*(philos[i].thread)))
+			throw_error(PTHREAD_DETACH_ERROR);
 		usleep(1);
 	}
 	usleep(200);
-	pthread_create(params->monitor, NULL, (void *)monitor, (void *)philos);
-	pthread_join(*(params->monitor), NULL);
-	pthread_detach(*(params->monitor));
+	if (pthread_create(params->monitor, NULL, (void *)monitor, (void *)philos))
+		throw_error(PTHREAD_START_ERROR);
+	if (pthread_join(*(params->monitor), NULL))
+		throw_error(PTHREAD_JOIN_ERROR);
+	if (pthread_detach(*(params->monitor)))
+		throw_error(PTHREAD_DETACH_ERROR);
+
 	return (0);
 }
-
