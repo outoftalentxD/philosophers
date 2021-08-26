@@ -6,24 +6,32 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:41 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/24 18:52:32 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 19:23:17 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int my_time(void)
+static void free_philos(t_philo *philos, pthread_mutex_t *forks)
 {
-	struct timeval tv;
-	int t;
+	int i;
+	int count;
 
-	gettimeofday(&tv, NULL);
-	t = tv.tv_usec;
-
-	// t = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	return (t);
-}
-
+	count = philos[0].params->count;
+	i = -1;
+	pthread_mutex_destroy(philos->params->pmute);
+	free(philos[0].params->pmute);
+	free(philos[0].params->monitor);
+	free(philos[0].params);
+	while (++i < count)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		free(philos[i].thread);
+	}
+	free(forks);
+	free(philos);
+	exit(0);
+}	
 
 int main(int argc, char **argv)
 {
@@ -39,4 +47,5 @@ int main(int argc, char **argv)
 	forks = init_forks(params->count);
 	philos = init_philos(params, forks);
 	init_threads(philos, params, forks);
+	free_philos(philos, forks);
 }		

@@ -6,11 +6,22 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:57:10 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/25 00:30:09 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 19:22:59 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static pthread_mutex_t *pmute_init(void)
+{
+	pthread_mutex_t *pmute;
+
+	pmute = ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!pmute)
+		throw_error(ALLOC_ERORR);
+	pthread_mutex_init(pmute, NULL);
+	return(pmute);
+}
 
 pthread_mutex_t *init_forks(int count)
 {
@@ -29,7 +40,7 @@ pthread_mutex_t *init_forks(int count)
 t_params *init_params(char **av)
 {
 	t_params	*params;
-	int			*waiter;
+	pthread_mutex_t *pmute;
 
 	av++;
 	params = ft_calloc(1, sizeof(t_params));
@@ -40,13 +51,13 @@ t_params *init_params(char **av)
 	params->eat_time = atoi(av[2]);
 	params->sleep_time = atoi(av[3]);
 	if (av[4])
-		params->eat_count = atoi(av[4]);
+		params->meals_count = atoi(av[4]);
 	else
-		params->eat_count = 0;
-	waiter = ft_calloc(params->count, sizeof(int));
-	if (!waiter)
-		throw_error(ALLOC_ERORR);
-	params->waiter = waiter;
+		params->meals_count = 0;
+	params->pmute = pmute_init();
+	params->monitor = ft_calloc(1, sizeof(pthread_t));
+	params->death = 0;
+	params->finished = 0;
 	return (params);
 }
 
@@ -70,7 +81,6 @@ t_philo *init_philos(t_params *params, pthread_mutex_t *forks)
 		philos[i].params = params;
 		philos[i].meals_count = 0;
 		philos[i].thread = ft_calloc(1, sizeof(pthread_t));
-		philos[i].monitor = ft_calloc(1, sizeof(pthread_t));
 		if (!philos[i].thread)
 			throw_error(ALLOC_ERORR);
 	}
@@ -81,18 +91,21 @@ int	init_threads(t_philo *philos, t_params *params, pthread_mutex_t *forks)
 {
 	long int time;
 	int i;
-	
-	i = -1;
+
 	time = get_curr_time();
+	i = -1;
 	while (++i < params->count)
 	{
 		philos[i].start = time;
 		philos[i].eat = time;
 		pthread_create(philos[i].thread, NULL, (void *)action, (void *)&philos[i]);
+		pthread_detach(*(philos[i].thread));
 		usleep(1);
 	}
 	usleep(200);
-	while (1);
+	pthread_create(params->monitor, NULL, (void *)monitor, (void *)philos);
+	pthread_join(*(params->monitor), NULL);
+	pthread_detach(*(params->monitor));
 	return (0);
 }
 

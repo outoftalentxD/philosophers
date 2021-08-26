@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 14:36:29 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/25 00:29:43 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/26 18:14:07 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,32 @@
 
 void monitor(t_philo *philo)
 {
-	long int time;
+	long int 	time;
+	int			i;
+	int			count;
+	t_params	*params;	
 
-	time = get_curr_time() - philo->eat;
-	if (time > philo->params->die_time);
-	
+	params = philo[0].params;
+	count = params->count;
+	while (1)
+	{
+		i = -1;
+		while(++i < count)
+		{
+			if (get_curr_time() - philo[i].eat > params->die_time)
+			{
+				params->death = 1;
+				pthread_mutex_lock(params->pmute);
+				printf("%ld philosopher %d has died\n", get_curr_time() - philo[i].start, philo[i].id);
+				return ;
+			}
+			if (params->count == params->finished)
+			{
+				params->death = 1;
+				return ;
+			}
+		}
+		usleep(1);
+	}
 }
 
