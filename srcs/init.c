@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:57:10 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 22:22:38 by melaena          ###   ########.fr       */
+/*   Updated: 2021/08/27 18:33:37 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	init_threads(t_philo *philos, t_params *params)
 			throw_error(PTHREAD_START_ERROR);
 		if (pthread_detach(*(philos[i].thread)))
 			throw_error(PTHREAD_DETACH_ERROR);
-		usleep(1);
+		usleep(100);
 	}
 	usleep(200);
 	if (pthread_create(params->monitor, NULL, (void *)monitor, (void *)philos))
