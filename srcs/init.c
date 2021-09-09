@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:57:10 by melaena           #+#    #+#             */
-/*   Updated: 2021/09/09 21:18:13 by melaena          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:20:16 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ t_philo	*init_philos(t_params *params, pthread_mutex_t *forks)
 	i = -1;
 	philos = ft_calloc(params->count, sizeof(t_philo));
 	if (!philos)
-	{
-		throw_error(ALLOC_ERORR);
 		return (0);
-	}
 	while (++i < params->count)
 	{
 		philos[i].id = i + 1;
@@ -99,10 +96,7 @@ t_philo	*init_philos(t_params *params, pthread_mutex_t *forks)
 		philos[i].meals_count = 0;
 		philos[i].thread = ft_calloc(1, sizeof(pthread_t));
 		if (!philos[i].thread)
-		{
-			throw_error(ALLOC_ERORR);
 			return (0);
-		}
 	}
 	return (philos);
 }
