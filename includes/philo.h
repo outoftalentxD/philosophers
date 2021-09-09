@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:47 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 22:22:21 by melaena          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:14:54 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # include "struct.h"
 
-void			throw_error(int code);
+int				throw_error(int code);
 long int		get_curr_time(void);
 void			my_usleep(int val);
 void			print_status(const char *arg, long int time, t_philo *philo);

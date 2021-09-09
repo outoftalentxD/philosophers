@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:12:41 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 22:22:27 by melaena          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:18:38 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ int	main(int argc, char **argv)
 	philos = init_philos(params, forks);
 	init_threads(philos, params);
 	free_philos(philos, forks);
-}		
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: melaena <melaena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 04:18:39 by melaena           #+#    #+#             */
-/*   Updated: 2021/08/26 22:21:15 by melaena          ###   ########.fr       */
+/*   Updated: 2021/09/09 21:14:56 by melaena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_number(char *str)
 	return (1);
 }
 
-void	throw_error(int code)
+int	throw_error(int code)
 {
 	char	*error;
 
@@ -60,7 +60,7 @@ void	throw_error(int code)
 	else if (code == PTHREAD_JOIN_ERROR)
 		error = "[X] ERROR: Pthread join erorr\n";
 	write(2, error, ft_strlen(error));
-	exit(0);
+	return (code);
 }
 
 long int	get_curr_time(void)
