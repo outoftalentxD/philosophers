@@ -22,7 +22,7 @@
     ./philosophers [number_of_philos] [time_to_eat] [time_to_sleep] [time_to_die] "[times_each_philo_must_eat]"
     ```
     
-   last argument is optional. Simulation will stop after each philo has eaten at least [times_each_philo_must_eat] times.
+   Last argument is optional. Simulation will stop after each philo has eaten at least [times_each_philo_must_eat] times.
    If last argument is not presented, sumulation will stop only if one of philosophers dies.
     
    ![](srcs/images/programExecuteSample.jpg)
