@@ -25,7 +25,9 @@
    If last argument is not presented, sumulation will stop only if one of philosophers dies.
     
    ![](srcs/images/programExecuteSample.jpg)
+   
    > Philospers dies, because they have not enouhg time to eat and sleep.
+   
    ![](srcs/images/programExecuteSample2.jpg)
   
   
