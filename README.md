@@ -10,7 +10,7 @@
   between each pair of philosophers. There is one chopstick between each philosopher. A philosopher may eat if he can pick up
   the two chopsticks adjacent to him. One chopstick may be picked up by any one of its adjacent followers but not both. 
  
-  ![alt text](https://github.com/outoftalentxD/philosophers/blob/master/srcs/readmeFiles/DinningProblem.jpg?raw=true)
+  ![](srcs/images/DinningProblem.jpg)
 
   
   Usage
