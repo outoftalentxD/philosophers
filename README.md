@@ -26,8 +26,10 @@
     
    ![](srcs/images/programExecuteSample.jpg)
    
-   > Philospers dies, because they have not enouhg time to eat and sleep.
+   > Simulation will continue, before all philosophers eat 2 times.
    
    ![](srcs/images/programExecuteSample2.jpg)
+   
+   > Philospers dies, because they have not enouhg time to eat and sleep.
   
   
